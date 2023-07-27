@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+	<!-- insert head from thymeleaf header fragment -->
+	<script src="/javascript/office-address.js"></script>
+	<div th:insert="~{fragments/header :: head}"></div>
+</head>
+
+<body>
+<div id="app">
+	<!-- insert navbar from thymeleaf nav fragment -->
+	<div th:insert="~{fragments/navbar :: nav}"></div>
+
+	<section id="ContactUs">
+		<div class="container-lg mt-5">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-md-10 text-center text-md-start">
+					<h1>
+						<div class="display-2 text-success">Food For All</div>
+						<div class="display-5 text-muted">Donate Food to the World</div>
+						<p class="lead my-4 text-muted">Hunger is considered the leading cause of death in the world.
+							Our planet has provided us with tremendous
+							resources, but unequal access and inefficient handling leaves millions of people
+							malnourished. It is said that
+							around 9 million people die every year of hunger and hunger-related diseases..
+							<br>
+							<br>
+							To know more about project and for any queries please dail </i> <a href="tel:+447435385752">+44
+								7435385752</a> or write to <a href="mailto:abhishekmn55@gmail.com">
+								abhishekmn55@gmail.com</a></p>
+					</h1>
+
+					<div class="container bg-light">
+						<div class="text-center">
+							<h2 class="my-3 text-success">Head Office is in Uk
+								<br>
+							</h2>
+							<p> Western Bank,
+								Sheffield,
+								S10 2TN,UK </p>
+						</div>
+						<div id="map" style="height: 300px; width: 100%;"></div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+</div>
+<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5QZ8Ze04-faOyB8kHs0rb9bd6Cmn7NCU&callback=initMap&v=weekly"
+		async></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var session = /*[[${session}]]*/ 'default';
+    var projects = /*[[${projects}]]*/'default';
+    console.log((projects))
+		var loginState = ""
+        if(session){
+            loginState = session.SPRING_SECURITY_CONTEXT.authentication.authenticated
+        }else{
+            loginState = false
+        }
+    /*]]>*/
+</script>
+<script src="/javascript/contact_us.js"></script>
+
+</body>
+</html>

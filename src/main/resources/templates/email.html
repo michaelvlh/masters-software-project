@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <!-- insert head from thymeleaf header fragment -->
+  <div th:insert="~{fragments/header :: head}"></div>
+
+  <title>Email Share</title>
+</head>
+
+<body>
+  <div th:insert="~{fragments/navbar :: nav}"></div>
+  <div id="email">
+    <h3 class="text-center text-198754 pt-5" style="color:#198754;">FOOD FOR ALL</h3>
+    <div class="container">
+      <form id="emailForm" method="POST">
+
+        <div class="form-group">
+          <label for="email2" style="color:#198754;">Email1:</label><br>
+          <input type="text" name="email1" id="email1" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="email2" style="color:#198754;">Email2:</label><br>
+          <input type="text" name="email2" id="email2" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="Subject" style="color:#198754;">Subject:</label><br>
+          <input type="text" id="subject" class="form-control" name="subject">
+        </div>
+        <div class="form-group">
+          <label for="msg" style="color:#198754;">Message:</label><br>
+          <input type="text" id="msg" class="form-control" name="msg">
+        </div>
+        <br><br><br>
+
+        <button id="submit" class="btn-md" style="color:#198754;" enable>submit</button>
+
+
+        <br><br>
+
+      </form>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <p class="text-muted my-4">©Copryight 2021 Food For All Team 12</p>
+      </div>
+    </div>
+  </div>
+  <!-- insert footer from thymeleaf fragments -->
+  <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+<script>
+
+  const submit = document.querySelector("#submit")
+  submit.addEventListener("click", (e) => {
+    e.preventDefault()
+    const form = document.querySelector("#emailForm")
+    const email1 = form.email1.value
+    const email2 = form.email2.value
+    const subject = form.subject.value
+    const msg = "Please donate using : http://localhost:8000/projects      " + "\nMessage:" + form.msg.value
+
+    const share = document.querySelector("#shareEmail")
+    var link = "mailto:" + email1 + "," + email2 + "?subject=" + subject + "&body=" + msg
+
+    window.location.href = link
+    window.location.href = '/'
+
+
+  })
+
+
+</script>
+
+</html>

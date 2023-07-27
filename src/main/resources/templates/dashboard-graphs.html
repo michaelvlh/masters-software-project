@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+    <div th:insert="~{fragments/header :: head}"></div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="print-content">
+            <!-- insert navbar from thymeleaf nav fragment -->
+            <div th:insert="~{fragments/navbar :: nav}"></div>
+            <div class="container">
+
+                <div class="row mt-5">
+                    <!-- insert navbar from thymeleaf sidebar fragment -->
+                    <!-- <div th:insert="~{fragments/sidebar :: sidebar}"></div> -->
+                    <div class="col">
+                        <div class="row">
+                            <div
+                                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">{{charityName}}</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <button id="export" type="button"
+                                        class="btn btn-sm btn-outline-secondary">Export</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dashboard">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Total Income</div>
+                                        <div class="card-body">
+                                            <!-- <h5 class="card-title">Total income</h5> -->
+                                            <p class="card-text">$ {{totalRevenue}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Projects</div>
+                                        <div class="card-body">
+                                            <!-- <h5 class="card-title">Total projects numbers</h5> -->
+                                            <p class="card-text">{{totlaProjects}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Completion</div>
+                                        <div class="card-body">
+                                            <!-- <h5 class="card-title">Completion projects</h5> -->
+                                            <p class="card-text">{{completedProjects}}/{{totlaProjects}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div id="pieChart" class="w-100" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-11">
+                                    <div id="lineChart" class="w-100" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--加载session数据-->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var session = /*[[${session}]]*/ 'default';
+        var dashboardData = /*[[${dashboardData}]]*/'default';
+        console.log("session: ", session)
+        var loginState = ""
+        var charityName = ""
+        if(session){
+            loginState = session.SPRING_SECURITY_CONTEXT.authentication.authenticated
+            charityName = session.SPRING_SECURITY_CONTEXT.authentication.name
+            console.log("charityName: ", charityName)
+        }else{
+            loginState = false
+        }
+        /*]]>*/
+    </script>
+    <script src="/javascript/dashboard_graphs.js"></script>
+</body>
+
+</html>

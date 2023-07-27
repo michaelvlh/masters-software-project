@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <!-- insert head from thymeleaf header fragment -->
+    <div th:insert="~{fragments/header :: head}"></div>
+</head>
+
+<body>
+    <div id="app">
+        <!-- insert navbar from thymeleaf nav fragment -->
+        <div th:insert="~{fragments/navbar :: nav}"></div>
+        <!-- main image and intro text -->
+        <section id="intro">
+            <div class="container-lg">
+                <div class="row justify-content-center align-items-center mt-5">
+                    <!--Title-->
+                    <div class="col-md-5 text-center text-md-start">
+                        <h1>
+                            <div class="display-2 text-success">Food For All</div>
+                            <div class="display-5 text-muted">Donate Food to the World</div>
+                            <p class="lead my-4 text-muted">Globally, one in nine people are hungry or undernourished.
+                                In
+                                2020, 2.37 billion people did not have access to
+                                enough safe and nutritious food.</p>
+                        </h1>
+                    </div>
+
+                    <!--Banner-->
+                    <div class="col-md-5 text-center d-none d-md-block">
+                        <img class="img-fluid" src="/banner01.jpg" alt="banner">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- pricing plans -->
+        <section id="pricing" class="bg-light">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="my-2 py-5 text-success">Most popular projects</h2>
+                    <p class="lead text-muted">If you want to see more you can <a href="/projects">go to all
+                            projects...</a></p>
+                </div>
+
+                <!--Recommended Projects-->
+                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
+                    <div class="col" v-for="project in projects">
+                        <!--card-->
+                        <div class="card h-100">
+                            <!--image-->
+                            <img :src="'data:image/*;base64,' + project.img" class="card-img-top" alt="...">
+
+                            <!--body-->
+                            <div class="card-body">
+                                <h5 class="card-title">{{project.title}}</h5>
+                                <p class="card-text">{{project.content.slice(0,150)}}...</p>
+                            </div>
+
+                            <!--footer-->
+                            <div class="card-footer bg-white border-0">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"
+                                        v-bind:style="{width: project.progress + '%'}"
+                                        v-bind:aria-valuenow="project.progress" aria-valuemin="0" aria-valuemax="100">
+                                        {{project.progress}}%</div>
+                                </div>
+                                <p class="display-5 my-4 text-primary fw-bold">${{project.price}}/meal</p>
+                                <a :href="'/projects/'+project.id" class="btn btn-primary stretched-link"> Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- insert footer from thymeleaf fragments -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var session = /*[[${session}]]*/ 'default';
+        var projects = /*[[${projects}]]*/'default';
+        var loginState = ""
+        if(session){
+            loginState = session.SPRING_SECURITY_CONTEXT.authentication.authenticated
+        }else{
+            loginState = false
+        }
+        /*]]>*/
+    </script>
+    <script src="/javascript/index.js"></script>
+    <script src="/javascript/money.js"></script>
+    <script src="/javascript/currencyEX.js"></script>
+</body>
+
+</html>

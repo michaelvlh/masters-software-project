@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+	<!-- insert head from thymeleaf header fragment -->
+	<div th:insert="~{fragments/header :: head}"></div>
+</head>
+
+<body>
+<div id="app">
+	<!-- insert navbar from thymeleaf nav fragment -->
+	<div th:insert="~{fragments/navbar :: nav}"></div>
+
+	<!--main page-->
+	<section id="add">
+		<div class="container-lg mt-5">
+			<div id="add-row" class="row justify-content-center align-items-center">
+				<div id="add-column" class="col-md-6">
+					<div id="add-box" class="col-md-12">
+
+
+						<h2 class="text-center text-198754 pt-1" style="color:#198754;">Add a new project </h2>
+
+						<form id="add-form" class="form" th:method="post" th:action="@{/projects}"
+						      th:object="${project}"
+						      enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="title" style="color:#198754;">Project Title:</label><br>
+								<input type="text" name="title" id="title" class="form-control"
+								       th:fields="*{title}"
+								       placeholder="Project Title">
+							</div>
+							<div class="form-group">
+								<label for="content" style="color:#198754;">Content:</label><br>
+								<input type="text" name="content" th:fields="*{content}" id="content"
+								       class="form-control"
+								       placeholder="Content">
+							</div>
+							<div class="form-group">
+								<label for="img" style="color:#198754;">Image:</label><br>
+								<input type="file" name="img" th:fields="*{img}" id="img" accept="image/*"
+								       class="form-control" placeholder="Image">
+							</div>
+							<div class="form-group">
+								<label for="targetmeals" style="color:#198754;">Target Meals:</label><br>
+								<input type="number" name="targetmeals" th:fields="*{targetmeals}" id="targetmeals"
+								       class="form-control" placeholder="Target Meals">
+							</div>
+							<div class="form-group">
+								<label for="positionName" style="color:#198754;">Country Name</label><br>
+								<input type="text" name="positionName" th:fields="*{positionName}" id="positionName"
+								       class="form-control" placeholder="Country Name">
+							</div>
+							<div class="form-group">
+								<label for="price" style="color:#198754;">Price per Meal</label><br>
+								<input type="number" step="0.01" name="price" th:fields="*{price}" id="price" class="form-control"
+								       placeholder="Price per meal">
+							</div>
+							<div class="form-group">
+								<input type="submit" name="submit" class="btn btn-md" style="color:#198754;"
+								       value="Add Project">
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:insert="~{fragments/footer :: footer}"></div>
+	</section>
+
+	<!-- insert footer from thymeleaf fragments -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+
+</div>
+<!--加载session数据-->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var session = /*[[${session}]]*/ 'default';
+    /*]]>*/
+</script>
+<script src="/javascript/project_add.js"></script>
+</body>
+
+</html>

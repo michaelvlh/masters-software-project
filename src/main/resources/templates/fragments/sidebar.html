@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <div th:fragment="sidebar">
+    <nav id="sidebarMenu"
+      class="col-md-3 col-lg-2 position-fixed d-flex flex-column flex-shrink-0 p-3 text-white bg-success sidebar collapse h-100 w-20">
+      <div class="pt-3">
+        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <img src="https://github.com/jishen027.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <span class="fs-4">Charity Name</span>
+        </a>
+        <a class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">Menu</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="/dashboard-graphs" class="nav-link"
+              v-bind:class="{active: tagActives.graphs, 'text-white': !tagActives.graphs}">
+              <i class="bi bi-bar-chart-line"></i>
+              Graphs
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard-projects" class="nav-link"
+              v-bind:class="{active: tagActives.projects, 'text-white': !tagActives.projects}" aria-current="page">
+              <i class="bi bi-kanban"></i>
+              My Projects
+            </a>
+          </li>
+        </ul>
+        <hr>
+        <div class="pt-10">
+          <a href="/projects/add" class="btn btn-warning d-flex text-white text-decoration-none">
+            <!-- <img src="https://github.com/jishen027.png" alt="" width="32" height="32" class="rounded-circle me-2"> -->
+            <strong>Create Project</strong>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <div th:insert="~{fragments/header :: head}"></div>
+  <meta charset="UTF-8">
+  <title>Payment Success</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <br><br>
+        <h2 style="color:#0fad00" class="text-center">Success</h2>
+        <h1 class="text-center">Your payment has been successfully processed!!</h1>
+        <p class="text-center" style="font-size:20px;color:#5C5C5C;">Please note down your reference id for future
+          reference</p>
+        <p class="text-center" style="font-size:20px;color:#5C5C5C;">[[${paymentID}]]</p>
+        <div class="text-center">
+          <a href="/" class="btn btn-success">Return to Home</a>
+          <a href="/email" class="btn btn-success">Share</a>
+        </div>
+        <br><br> 
+      </div>
+
+    </div>
+  </div>
+  <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+
+</html>
