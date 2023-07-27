@@ -1,0 +1,61 @@
+<html lang="en">
+
+<head>
+    <div th:insert="~{fragments/header :: head}"></div>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar {
+            left: 0;
+            z-index: 100;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- insert navbar from thymeleaf nav fragment -->
+        <div th:insert="~{fragments/navbar :: nav}"></div>
+
+        <div class="container-fluid">
+            <div class="row mt-5">
+                <!-- insert navbar from thymeleaf sidebar fragment  -->
+                <div th:insert="~{fragments/sidebar :: sidebar}"></div>
+
+                <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
+                    <div class="row row-cols-1 row-cols-sm-3 row-col-lg-4 g-1">
+                        <p class="mt-2 text-white"> top </p>
+                        <input v-model="term" class="form-control form-control-dark w-100" type="text"
+                            placeholder="Search the project" aria-label="Search">
+                        <div class="col" v-for="project in filteredProjects">
+                            <div class="card h-100 m-2">
+                                <img v-bind:src="project.img" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{project.title}}</h5>
+                                    <p class="card-text">{{project.content}}</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="/detail" class="btn btn-primary stretched-link d-flex">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <script src="/javascript/dashboard_projects.js"></script>
+</body>
+<!--加载session数据-->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var session = /*[[${session}]]*/ 'default';
+    var projects = /*[[${projects}]]*/'default';
+    console.log((projects))
+    /*]]>*/
+</script>
+</html>

@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+	<!-- insert head from thymeleaf header fragment -->
+	<div th:insert="~{fragments/header :: head}"></div>
+</head>
+
+<nav class="navbar navbar-expand-md navbar-light fix-top border-bottom">
+    <div class="container-xxl">
+        <a href="/" class="navbar-brand">
+                <span class="fw-bold text-success">
+                    <i class="bi bi-balloon-heart-fill"></i>
+                    Food For All
+                </span>
+        </a>
+        <!-- toggle button for mobile nav -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- navbar links -->
+        <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+	                <a th:href="@{~/}"  class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{~/projects}" class="nav-link">Projects</a>
+                </li>
+                <!--<li class="nav-item">-->
+                <!--    <a th:href="@{~/about-us}"  class="nav-link">About us</a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a th:href="@{~/contact-us}" class="nav-link">Contact Us</a>
+                </li>
+	            <!--<li class="nav-item  d-md-inline text-end">-->
+		        <!--    <a href="/dashboard-graphs" class="btn btn-success">DashBoard</a>-->
+	            <!--</li> &ndash;&gt;-->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+<div id="app">
+
+	<div id="login">
+		<h3 class="text-center text-198754 pt-5" style="color:#198754;">FOOD FOR ALL</h3>
+		<div class="container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+
+
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+
+						<!-- register successfully -->
+						<div th:if="${param.registerSuccess}">
+							<div class="alter alert-success"> Reigistered successfully</div>
+						</div>
+						<!--logged out-->
+						<div th:if="${param.logout}" class="alert alert-success">
+							You have been logged out.
+						</div>
+						<!--Log in error-->
+						<div th:if="${param.loginError}">
+							<div class="alert alert-danger" th:text="${errorMsg}"> empty login error message</div>
+						</div>
+
+						<form id="login-form" class="form" th:action="@{/login}" th:object="${loginForm}" method="post">
+							<h2 class="text-center text-198754 pt-1" style="color:#198754;">Login Page </h2>
+							<div class="form-group">
+								<label for="email" style="color:#198754;">Email:</label><br>
+								<input type="email" name="email" id="email" class="form-control" th:field="*{email}">
+							</div>
+							<div class="form-group">
+								<label for="password" style="color:#198754;">Password:</label><br>
+								<input type="password" name="password" id="password" class="form-control"
+								       th:field="*{password}">
+							</div>
+
+							<div class="form-group">
+								<input type="submit" name="submit" class="btn btn-warning btn-md" style="color:#198754;"
+								       value="submit">
+							</div>
+						</form>
+						<div id="register-link" class="text-right">
+							<a th:href="@{~/register}" style="color:#198754;">Register here</a>
+						</div>
+						<br>
+						<div id="link-link1" class="text-right">
+							<a th:href="@{~/}" style="color:#198754;">Don't want to login? Click here to Continue as
+								Guest</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:insert="~{fragments/footer :: footer}"></div>
+	</div>
+</div>
+
+<!--1 登录页session可能被清空-->
+
+<!--此处不可以引入script 1。springsecurity提供了标准的login.js 2。重复引入带有new vue的js-->
+<!--2。调用login.js读取session并设置login状态-->>
+</body>
+
+</html>
